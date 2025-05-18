@@ -22,14 +22,37 @@ return {
   {
     "neovim/nvim-lspconfig",
     config = function()
-      -- General Setup (Keymapping)
+      local lspconfig = require("lspconfig")
+
+      -- Configure diagnostic appearance
+      vim.diagnostic.config({
+        virtual_text = true,
+        signs = true,
+        underline = true,
+        update_in_insert = false,
+        severity_sort = true,
+      })
+
+      -- Diagnostic float on cursor hold
+      vim.o.updatetime = 250
+      vim.api.nvim_create_autocmd("CursorHold", {
+        callback = function()
+          vim.diagnostic.open_float(nil, {
+            focusable = false,
+            border = "rounded",
+            source = "always",
+            scope = "cursor",
+          })
+        end,
+      })
+
+      -- Keymaps for LSP
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
       vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
-      vim.keymap.set({ "n" }, "<leader>ca", vim.lsp.buf.code_action, {})
+      vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
 
-      -- Setup for Lua
-      vim.lsp.enable("lua_ls")
-      vim.lsp.config("lua_ls", {
+      -- Lua LSP
+      lspconfig.lua_ls.setup({
         settings = {
           Lua = {
             diagnostics = {
@@ -39,11 +62,11 @@ return {
         },
       })
 
-      -- Setup for Python
-      vim.lsp.enable("pyright")
+      -- Python LSP
+      lspconfig.pyright.setup({})
 
-      -- Setup for TypeScript
-      vim.lsp.enable("ts_ls")
+      -- TypeScript LSP
+      lspconfig.ts_ls.setup({})
     end,
   },
 }
