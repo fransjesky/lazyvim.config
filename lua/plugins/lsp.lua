@@ -22,6 +22,11 @@ return {
   {
     "neovim/nvim-lspconfig",
     config = function()
+      -- General Setup (Keymapping)
+      vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
+      vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
+      vim.keymap.set({ "n" }, "<leader>ca", vim.lsp.buf.code_action, {})
+
       -- Setup for Lua
       vim.lsp.enable("lua_ls")
       vim.lsp.config("lua_ls", {
