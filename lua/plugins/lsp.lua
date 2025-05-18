@@ -13,7 +13,7 @@ return {
     dependencies = { "williamboman/mason.nvim" },
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "pyright", "typescript-language-server" },
+        ensure_installed = { "lua_ls", "pyright", "ts_ls" },
       })
     end,
   },
@@ -22,13 +22,9 @@ return {
   {
     "neovim/nvim-lspconfig",
     config = function()
-      local lspconfig = require("lspconfig")
-
-      -- Setup for Pyright
-      lspconfig.pyright.setup({})
-
       -- Setup for Lua
-      lspconfig.lua_ls.setup({
+      vim.lsp.enable("lua_ls")
+      vim.lsp.config("lua_ls", {
         settings = {
           Lua = {
             diagnostics = {
@@ -37,6 +33,12 @@ return {
           },
         },
       })
+
+      -- Setup for Python
+      vim.lsp.enable("pyright")
+
+      -- Setup for TypeScript
+      vim.lsp.enable("ts_ls")
     end,
   },
 }
