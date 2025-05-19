@@ -13,7 +13,7 @@ return {
     dependencies = { "williamboman/mason.nvim" },
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "pyright", "ts_ls" },
+        ensure_installed = { "lua_ls", "pyright", "ruff", "ts_ls" },
       })
     end,
   },
@@ -62,13 +62,15 @@ return {
 
       -- Python LS config
       vim.lsp.config("pyright", {})
+      vim.lsp.config("ruff", {})
 
       -- TypeScript LS config
       vim.lsp.config("ts_ls", {})
 
       -- Enable LSPs
       vim.lsp.enable("lua_ls")
-      vim.lsp.enable("pyright")
+      vim.lsp.enable("pyright") -- To handle Python type checking
+      vim.lsp.enable("ruff") -- To handle Python linting
       vim.lsp.enable("ts_ls")
     end,
   },
