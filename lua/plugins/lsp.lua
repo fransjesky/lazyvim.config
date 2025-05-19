@@ -22,9 +22,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     config = function()
-      local lspconfig = require("lspconfig")
-
-      -- Configure diagnostic appearance
+      -- Configure global diagnostics behavior
       vim.diagnostic.config({
         virtual_text = true,
         signs = true,
@@ -51,8 +49,8 @@ return {
       vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
       vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
 
-      -- Lua LSP
-      lspconfig.lua_ls.setup({
+      -- Lua LS config
+      vim.lsp.config("lua_ls", {
         settings = {
           Lua = {
             diagnostics = {
@@ -62,11 +60,16 @@ return {
         },
       })
 
-      -- Python LSP
-      lspconfig.pyright.setup({})
+      -- Python LS config
+      vim.lsp.config("pyright", {})
 
-      -- TypeScript LSP
-      lspconfig.ts_ls.setup({})
+      -- TypeScript LS config
+      vim.lsp.config("ts_ls", {})
+
+      -- Enable LSPs
+      vim.lsp.enable("lua_ls")
+      vim.lsp.enable("pyright")
+      vim.lsp.enable("ts_ls")
     end,
   },
 }
