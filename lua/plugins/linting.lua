@@ -26,7 +26,7 @@ return {
       })
 
       vim.keymap.set("n", "<leader>cl", function()
-        lint.try_lint()
+        pcall(require, lint.try_lint)
       end, { desc = "Lint File" })
     end,
   },
