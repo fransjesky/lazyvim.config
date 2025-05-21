@@ -1,23 +1,29 @@
 return {
   -- Mason
   {
-    "williamboman/mason.nvim",
-    config = function()
-      require("mason").setup()
-    end,
+    "mason-org/mason.nvim",
+    opts = {},
   },
 
   -- Mason LSP Config
   {
-    "williamboman/mason-lspconfig.nvim",
-    dependencies = { "williamboman/mason.nvim" },
+    "mason-org/mason-lspconfig.nvim",
+    dependencies = {
+      { "mason-org/mason.nvim", opts = {} },
+      "neovim/nvim-lspconfig",
+    },
     config = function()
       require("mason-lspconfig").setup({
         ensure_installed = {
+          "eslint",
+          "jsonls",
           "lua_ls",
+          "marksman",
           "pyright",
           "ruff",
+          "tailwindcss",
           "ts_ls",
+          "vtsls",
         },
       })
     end,
