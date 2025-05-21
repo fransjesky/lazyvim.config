@@ -38,9 +38,3 @@ git clone git@github.com:fransjesky/lazyvim.config.git ~/.config/nvim
 ```
 
 Run Neovim and let the plugins install and update automatically.
-<br />
-You will need to do manual installation for Formatters and Linters using **Mason**.
-
-```sh
-:MasonInstall stylua black isort prettier eslint_d
-```

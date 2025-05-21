@@ -19,7 +19,7 @@ return {
         transparent_background = true,
         color_overrides = {
           mocha = {
-            pink = "#89b4fa",
+            pink = "#cba6f7",
           },
         },
       })
