@@ -1,6 +1,9 @@
 return {
+  -- Override LazyVim's tokyonight config
   {
     "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
     opts = {
       transparent = true,
       styles = {

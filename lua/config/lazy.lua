@@ -17,7 +17,21 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   spec = {
     -- add LazyVim and import its plugins
-    { "LazyVim/LazyVim", import = "lazyvim.plugins", opts = { colorscheme = "catppuccin" } },
+    {
+      "LazyVim/LazyVim",
+      import = "lazyvim.plugins",
+      opts = {
+        colorscheme = "catppuccin",
+        -- Disable problematic LazyVim plugins
+        news = {
+          lazyvim = false,
+          neovim = false,
+        },
+      }
+    },
+    -- Disable LazyVim's bufferline and colorscheme configs
+    { "akinsho/bufferline.nvim", enabled = false },
+    { "folke/tokyonight.nvim", enabled = false },
     -- import/override with your plugins
     { import = "plugins" },
   },
