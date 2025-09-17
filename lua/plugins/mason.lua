@@ -7,7 +7,6 @@ return {
         "csharp-language-server",
         "csharpier",
         -- JavaScript/TypeScript
-        "vtsls",
         "typescript-language-server",
         "eslint-lsp",
         "prettier",
@@ -23,7 +22,7 @@ return {
     opts = {
       ensure_installed = {
         "csharp_ls",
-        "vtsls",
+        "ts_ls",
         "eslint",
         "pyright",
       },

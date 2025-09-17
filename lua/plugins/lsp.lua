@@ -10,28 +10,37 @@ return {
     },
     config = function()
       local lspconfig = require("lspconfig")
-      local mason_lspconfig = require("mason-lspconfig")
+
+      -- Check if mason-lspconfig is available
+      local has_mason_lspconfig, mason_lspconfig = pcall(require, "mason-lspconfig")
+      if not has_mason_lspconfig then
+        vim.notify("mason-lspconfig not found, falling back to manual lspconfig setup", vim.log.levels.WARN)
+        return
+      end
 
       -- Common LSP on_attach function
       local on_attach = function(client, bufnr)
         -- Enable completion triggered by <c-x><c-o>
-        vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+        vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
         -- Mappings
-        local bufopts = { noremap=true, silent=true, buffer=bufnr }
-        vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-        vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-        vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-        vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-        vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-        vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-        vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-        vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+        local bufopts = { noremap = true, silent = true, buffer = bufnr }
+        vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
+        vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+        vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
+        vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
+        vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
+        vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, bufopts)
+        vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
+        vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
+        vim.keymap.set("n", "<space>f", function()
+          vim.lsp.buf.format({ async = true })
+        end, bufopts)
       end
 
-      -- Setup mason-lspconfig handlers
-      mason_lspconfig.setup_handlers({
+      -- Setup mason-lspconfig with handlers
+      mason_lspconfig.setup({
+        handlers = {
         -- Default handler
         function(server_name)
           lspconfig[server_name].setup({
@@ -50,38 +59,6 @@ return {
           })
         end,
 
-        -- TypeScript/JavaScript configuration
-        ["vtsls"] = function()
-          lspconfig.vtsls.setup({
-            on_attach = on_attach,
-            settings = {
-              complete_function_calls = true,
-              vtsls = {
-                enableMoveToFileCodeAction = true,
-                autoUseWorkspaceTsdk = true,
-                experimental = {
-                  completion = {
-                    enableServerSideFuzzyMatch = true,
-                  },
-                },
-              },
-              typescript = {
-                updateImportsOnFileMove = { enabled = "always" },
-                suggest = {
-                  completeFunctionCalls = true,
-                },
-                inlayHints = {
-                  enumMemberValues = { enabled = true },
-                  functionLikeReturnTypes = { enabled = true },
-                  parameterNames = { enabled = "literals" },
-                  parameterTypes = { enabled = true },
-                  propertyDeclarationTypes = { enabled = true },
-                  variableTypes = { enabled = false },
-                },
-              },
-            },
-          })
-        end,
 
         -- ESLint configuration
         ["eslint"] = function()
@@ -91,34 +68,33 @@ return {
               codeAction = {
                 disableRuleComment = {
                   enable = true,
-                  location = "separateLine"
+                  location = "separateLine",
                 },
                 showDocumentation = {
-                  enable = true
-                }
+                  enable = true,
+                },
               },
               codeActionOnSave = {
                 enable = false,
-                mode = "all"
+                mode = "all",
               },
               experimental = {
-                useFlatConfig = false
+                useFlatConfig = false,
               },
-              format = true,
+              format = false,
               nodePath = "",
               onIgnoredFiles = "off",
               packageManager = "npm",
               problems = {
-                shortenToSingleLine = false
+                shortenToSingleLine = false,
               },
-              quiet = false,
-              rulesCustomizations = {},
-              run = "onType",
+              quiet = true,
+              run = "onSave",
               useESLintClass = false,
               validate = "on",
               workingDirectory = {
-                mode = "location"
-              }
+                mode = "location",
+              },
             },
           })
         end,
@@ -138,6 +114,7 @@ return {
             },
           })
         end,
+        }
       })
     end,
   },
