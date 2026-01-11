@@ -7,6 +7,13 @@
 -- Or remove existing autocmds by their group name (which is prefixed with `lazyvim_` for the defaults)
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
 
+-- Prisma filetype detection
+vim.filetype.add({
+  extension = {
+    prisma = "prisma",
+  },
+})
+
 -- Suppress Treesitter highlight group linking messages
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
