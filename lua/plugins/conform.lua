@@ -23,6 +23,11 @@ return {
       markdown = { "prettier" },
       -- YAML
       yaml = { "prettier" },
+      -- SQL (MySQL, PostgreSQL, etc.)
+      sql = { "sql_formatter" },
+      mysql = { "sql_formatter" },
+      pgsql = { "sql_formatter" },
+      plsql = { "sql_formatter" },
     },
     formatters = {
       csharpier = {},
@@ -62,6 +67,10 @@ return {
       ruff_organize_imports = {
         command = vim.fn.stdpath("data") .. "/mason/bin/ruff",
         args = { "check", "--select", "I", "--fix", "--stdin-filename", "$FILENAME", "-" },
+      },
+      sql_formatter = {
+        command = vim.fn.stdpath("data") .. "/mason/bin/sql-formatter",
+        args = { "--language", "sql" },
       },
     },
   },

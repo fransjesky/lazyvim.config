@@ -44,12 +44,25 @@ return {
       "vimdoc",
       "xml",
       "yaml",
+      "sql",
     },
   },
   config = function(_, opts)
     -- Register custom language mappings
     vim.treesitter.language.register("c_sharp", "cs")
     vim.treesitter.language.register("prisma", "prisma")
+
+    -- Register XAML/AXAML to use XML treesitter parser for syntax highlighting
+    vim.treesitter.language.register("xml", "xaml")
+    vim.treesitter.language.register("xml", "axaml")
+
+    -- Ensure XAML and AXAML (Avalonia) files are recognized
+    vim.filetype.add({
+      extension = {
+        xaml = "xaml",
+        axaml = "axaml",
+      },
+    })
 
     -- Enable highlight and indent if configured
     if opts.highlight and opts.highlight.enable then

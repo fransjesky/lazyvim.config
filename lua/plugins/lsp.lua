@@ -114,6 +114,39 @@ return {
             },
           })
         end,
+
+        -- SQL configuration (MySQL, PostgreSQL, SQLite, etc.)
+        ["sqls"] = function()
+          lspconfig.sqls.setup({
+            on_attach = function(client, bufnr)
+              on_attach(client, bufnr)
+              -- Disable sqls formatting in favor of sql-formatter via conform
+              client.server_capabilities.documentFormattingProvider = false
+              client.server_capabilities.documentRangeFormattingProvider = false
+            end,
+            settings = {
+              sqls = {
+                connections = {
+                  -- Example MySQL connection (uncomment and configure as needed)
+                  -- {
+                  --   driver = "mysql",
+                  --   dataSourceName = "user:password@tcp(127.0.0.1:3306)/database",
+                  -- },
+                  -- Example PostgreSQL connection (uncomment and configure as needed)
+                  -- {
+                  --   driver = "postgresql",
+                  --   dataSourceName = "host=127.0.0.1 port=5432 user=postgres password=password dbname=database sslmode=disable",
+                  -- },
+                  -- Example SQLite connection (uncomment and configure as needed)
+                  -- {
+                  --   driver = "sqlite3",
+                  --   dataSourceName = "/path/to/database.db",
+                  -- },
+                },
+              },
+            },
+          })
+        end,
         }
       })
     end,

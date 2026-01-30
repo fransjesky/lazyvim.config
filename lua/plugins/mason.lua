@@ -14,6 +14,9 @@ return {
         "pyright",
         "ruff",
         "black",
+        -- SQL
+        "sql-formatter",
+        "sqls",
       },
     },
   },
@@ -25,6 +28,7 @@ return {
         "ts_ls",
         "eslint",
         "pyright",
+        "sqls",
       },
       automatic_installation = true,
     },
