@@ -21,7 +21,7 @@ require("lazy").setup({
       "LazyVim/LazyVim",
       import = "lazyvim.plugins",
       opts = {
-        colorscheme = "catppuccin",
+        colorscheme = "tokyonight",
         -- Disable problematic LazyVim plugins
         news = {
           lazyvim = false,
@@ -31,7 +31,7 @@ require("lazy").setup({
     },
     -- Disable LazyVim's bufferline and colorscheme configs
     { "akinsho/bufferline.nvim", enabled = false },
-    { "folke/tokyonight.nvim", enabled = false },
+    { "folke/tokyonight.nvim", enabled = true },
     -- import/override with your plugins
     { import = "plugins" },
   },
