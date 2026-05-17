@@ -31,6 +31,9 @@ return {
       -- Load additional snippets for C#
       luasnip.filetype_extend("cs", { "csharp" })
 
+      -- Load Java snippets
+      luasnip.filetype_extend("java", { "java" })
+
       -- Load additional snippets for Python
       luasnip.filetype_extend("python", { "django" })
 
@@ -149,6 +152,60 @@ return {
           luasnip.dynamic_node(6, function(args)
             return luasnip.snippet_node(nil, {luasnip.text_node(args[1][1])})
           end, {1}),
+        }),
+      })
+
+      -- Add custom Java snippets
+      luasnip.add_snippets("java", {
+        luasnip.snippet("class", {
+          luasnip.text_node("public class "),
+          luasnip.insert_node(1, "ClassName"),
+          luasnip.text_node({ " {", "\t" }),
+          luasnip.insert_node(2, "// TODO: Implement"),
+          luasnip.text_node({ "", "}" }),
+        }),
+        luasnip.snippet("main", {
+          luasnip.text_node({ "public static void main(String[] args) {", "\t" }),
+          luasnip.insert_node(1, "// TODO: Implement"),
+          luasnip.text_node({ "", "}" }),
+        }),
+        luasnip.snippet("sout", {
+          luasnip.text_node("System.out.println("),
+          luasnip.insert_node(1),
+          luasnip.text_node(");"),
+        }),
+        luasnip.snippet("method", {
+          luasnip.text_node("public "),
+          luasnip.insert_node(1, "void"),
+          luasnip.text_node(" "),
+          luasnip.insert_node(2, "methodName"),
+          luasnip.text_node("("),
+          luasnip.insert_node(3),
+          luasnip.text_node({ ") {", "\t" }),
+          luasnip.insert_node(4, "// TODO: Implement"),
+          luasnip.text_node({ "", "}" }),
+        }),
+        luasnip.snippet("fori", {
+          luasnip.text_node("for (int "),
+          luasnip.insert_node(1, "i"),
+          luasnip.text_node(" = 0; "),
+          luasnip.function_node(function(args) return args[1][1] end, { 1 }),
+          luasnip.text_node(" < "),
+          luasnip.insert_node(2, "n"),
+          luasnip.text_node("; "),
+          luasnip.function_node(function(args) return args[1][1] end, { 1 }),
+          luasnip.text_node({ "++) {", "\t" }),
+          luasnip.insert_node(3, "// TODO: Implement"),
+          luasnip.text_node({ "", "}" }),
+        }),
+        luasnip.snippet("ife", {
+          luasnip.text_node("if ("),
+          luasnip.insert_node(1, "condition"),
+          luasnip.text_node({ ") {", "\t" }),
+          luasnip.insert_node(2, "// TODO: Implement"),
+          luasnip.text_node({ "", "} else {", "\t" }),
+          luasnip.insert_node(3, "// TODO: Implement"),
+          luasnip.text_node({ "", "}" }),
         }),
       })
 

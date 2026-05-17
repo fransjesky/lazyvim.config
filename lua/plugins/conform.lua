@@ -2,6 +2,8 @@ return {
   "stevearc/conform.nvim",
   opts = {
     formatters_by_ft = {
+      -- Java
+      java = { "google_java_format" },
       -- C#
       cs = { "csharpier" },
       -- JavaScript/TypeScript
@@ -30,6 +32,10 @@ return {
       plsql = { "sql_formatter" },
     },
     formatters = {
+      google_java_format = {
+        command = vim.fn.stdpath("data") .. "/mason/bin/google-java-format",
+        args = { "-" },
+      },
       csharpier = {},
       prettier = {
         command = vim.fn.stdpath("data") .. "/mason/bin/prettier",

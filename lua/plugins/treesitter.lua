@@ -21,6 +21,7 @@ return {
       "bash",
       "c",
       "c_sharp",
+      "java",
       "css",
       "diff",
       "html",

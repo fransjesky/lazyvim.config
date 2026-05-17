@@ -3,6 +3,9 @@ return {
     "mason-org/mason.nvim",
     opts = {
       ensure_installed = {
+        -- Java
+        "jdtls",
+        "google-java-format",
         -- C#
         "csharp-language-server",
         "csharpier",
