@@ -31,6 +31,9 @@ return {
       -- Load additional snippets for C#
       luasnip.filetype_extend("cs", { "csharp" })
 
+      -- Load PHP and Laravel snippets
+      luasnip.filetype_extend("php", { "php", "laravel" })
+
       -- Load Java snippets
       luasnip.filetype_extend("java", { "java" })
 

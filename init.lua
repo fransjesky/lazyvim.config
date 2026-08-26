@@ -6,3 +6,6 @@ require("config.lazy")
 
 -- Load React/JSX filetype detection
 require("filetype.react")
+
+-- Load PHP/Laravel filetype detection
+require("filetype.php")
