@@ -3,7 +3,3 @@
 -- Add any additional options here
 vim.opt.guicursor = ""
 vim.g.autoformat = false
-
--- Ensure syntax highlighting is always enabled
-vim.cmd("syntax enable")
-vim.opt.syntax = "on"

@@ -26,6 +26,7 @@ return {
       "diff",
       "html",
       "javascript",
+      "jsx",
       "jsdoc",
       "json",
       "lua",

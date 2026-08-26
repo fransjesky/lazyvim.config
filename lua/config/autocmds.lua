@@ -14,6 +14,17 @@ vim.filetype.add({
   },
 })
 
+-- React JSX/TSX filetype detection and Treesitter parser registration
+vim.filetype.add({
+  extension = {
+    ["jsx"] = "javascriptreact",
+    ["tsx"] = "typescriptreact",
+  },
+})
+
+vim.treesitter.language.register("jsx", "javascriptreact")
+vim.treesitter.language.register("typescript", "typescriptreact")
+
 -- Suppress Treesitter highlight group linking messages
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
